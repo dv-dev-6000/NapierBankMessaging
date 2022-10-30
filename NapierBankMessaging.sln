@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32106.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NapierBankMessaging", "NapierBankMessaging\NapierBankMessaging.csproj", "{D6965206-DC46-4A9C-BCD4-65C9A739ACF4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D6965206-DC46-4A9C-BCD4-65C9A739ACF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6965206-DC46-4A9C-BCD4-65C9A739ACF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6965206-DC46-4A9C-BCD4-65C9A739ACF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6965206-DC46-4A9C-BCD4-65C9A739ACF4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40F566CD-F48E-468B-A338-2F383BA3B5DF}
+	EndGlobalSection
+EndGlobal
