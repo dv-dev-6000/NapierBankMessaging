@@ -23,6 +23,14 @@ namespace NapierBankMessaging
         public MainWindow()
         {
             InitializeComponent();
+
+            
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string[] dictionary = System.IO.File.ReadAllLines(@"DataLayer/textwords.csv");
         }
     }
 }

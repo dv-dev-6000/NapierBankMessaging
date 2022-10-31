@@ -6,4 +6,18 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="DataLayer\textwords.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="DataLayer\textwords.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BusinessLayer\" />
+  </ItemGroup>
+
 </Project>
