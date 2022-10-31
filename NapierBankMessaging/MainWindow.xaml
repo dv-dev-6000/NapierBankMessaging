@@ -1,12 +1,55 @@
-﻿<Window x:Class="NapierBankMessaging.MainWindow"
+﻿<Window x:Name="window" x:Class="NapierBankMessaging.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NapierBankMessaging"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" WindowStyle="SingleBorderWindow" WindowState="Normal" WindowStartupLocation="CenterScreen" SizeToContent="Manual" Background="#FF2D2D30" ResizeMode="NoResize" Width="1080" Height="720">
+
+
     <Grid>
+        <Rectangle x:Name="TitleRec" HorizontalAlignment="Left" Height="71" Margin="-25,22,0,0" VerticalAlignment="Top" Width="400" Fill="#FF68B6B2" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleX="-25"/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Rectangle x:Name="TitleRec_Copy" HorizontalAlignment="Left" Height="80" Margin="-51,72,0,0" VerticalAlignment="Top" Width="280" Fill="#FF6876B6" RenderTransformOrigin="0.5,0.5">
+            <Rectangle.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="0.5"/>
+                    <SkewTransform AngleX="-25"/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Rectangle.RenderTransform>
+        </Rectangle>
+        <Label Content="NAPIER BANK" HorizontalAlignment="Left" Margin="4,21,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="52" Width="344"/>
+        <Label Content="MESSAGING" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="32" Width="201" Foreground="White"/>
+        <Rectangle HorizontalAlignment="Left" Height="504" Margin="29,172,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="395"/>
+        <Rectangle HorizontalAlignment="Left" Height="504" Margin="460,172,0,0" Stroke="#FF6876B6" VerticalAlignment="Top" Width="586"/>
+        <Rectangle HorizontalAlignment="Left" Height="116" Margin="460,21,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="280"/>
+        <TextBox HorizontalAlignment="Left" Margin="46,231,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="#FFCDCDCD"/>
+        <TextBox HorizontalAlignment="Left" Margin="46,301,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="#FFCDCDCD" Height="324"/>
+        <Label Content="Message Header" HorizontalAlignment="Left" Margin="42,200,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <Label Content="Message Body" HorizontalAlignment="Left" Margin="42,270,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White"/>
+        <Label Content="Process Message" HorizontalAlignment="Left" Margin="42,153,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF68B6B2" FontSize="20"/>
+        <Button Content="Process" HorizontalAlignment="Left" Margin="176,639,0,0" VerticalAlignment="Top" FontSize="16" Width="100"/>
+        <Rectangle HorizontalAlignment="Left" Height="116" Margin="765,21,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="280"/>
+        <Button Content="Trending" HorizontalAlignment="Left" Margin="485,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100"/>
+        <Button Content="Quarentine" HorizontalAlignment="Left" Margin="485,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100"/>
+        <Button Content="SIR" HorizontalAlignment="Left" Margin="615,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100"/>
+        <Button Content="Mentions" HorizontalAlignment="Left" Margin="615,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100"/>
+        <Button Content="Process Single File" HorizontalAlignment="Left" Margin="822,45,0,0" VerticalAlignment="Top" FontSize="16" Width="166"/>
+        <Button Content="Process Multiple Files" HorizontalAlignment="Left" Margin="822,93,0,0" VerticalAlignment="Top" FontSize="16" Width="166"/>
+        <Label Content="View Lists" HorizontalAlignment="Left" Margin="470,1,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF68B6B2" FontSize="20"/>
+        <Label Content="Load External Messages" HorizontalAlignment="Left" Margin="777,1,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF68B6B2" FontSize="20"/>
 
     </Grid>
+
 </Window>
