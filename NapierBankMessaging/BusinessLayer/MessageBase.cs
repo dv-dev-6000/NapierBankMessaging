@@ -9,17 +9,17 @@ namespace NapierBankMessaging
     class MessageBase
     {
         // Class Variables
-        protected string _messageHeader;
-        protected string _messageBody;
+        protected string _rawHeader;
+        protected string[] _rawBody;
 
         // Accessor methods
-        public string MessageHeader { get => _messageHeader; set => _messageHeader = value; }
-        public string MessageBody { get => _messageBody; set => _messageBody = value; }
+        public string MessageHeader { get => _rawHeader; set => _rawHeader = value; }
+        public string[] MessageBody { get => _rawBody; set => _rawBody = value; }
 
-        public MessageBase(string header, string body)
+        public MessageBase(string header, string[] body)
         {
-            _messageHeader = header;
-            _messageBody = body;
+            _rawHeader = header;
+            _rawBody = body;
         }
 
         

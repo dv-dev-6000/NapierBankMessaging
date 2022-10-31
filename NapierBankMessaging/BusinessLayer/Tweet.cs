@@ -12,7 +12,7 @@ namespace NapierBankMessaging
         private string sender;
         private string filteredBody;
 
-        public Tweet(string header, string body) : base(header, body)
+        public Tweet(string header, string[] body) : base(header, body)
         {
 
         }

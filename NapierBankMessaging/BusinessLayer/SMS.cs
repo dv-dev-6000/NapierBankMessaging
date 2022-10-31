@@ -12,7 +12,7 @@ namespace NapierBankMessaging
         private string phoneNumber;
         private string filteredBody;
 
-        public SMS(string header, string body) : base(header, body)
+        public SMS(string header, string[] body) : base(header, body)
         {
 
         }

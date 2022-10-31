@@ -13,7 +13,7 @@ namespace NapierBankMessaging
         protected string subject;
         protected string filteredBody;
 
-        public EmailStandard(string header, string body) : base(header, body)
+        public EmailStandard(string header, string[] body) : base(header, body)
         {
 
         }
@@ -25,7 +25,7 @@ namespace NapierBankMessaging
         private string sortCode;
         private string IncidentNature;
 
-        public EmailSIR(string header, string body) : base(header, body)
+        public EmailSIR(string header, string[] body) : base(header, body)
         {
 
         }

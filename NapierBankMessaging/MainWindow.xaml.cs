@@ -20,17 +20,57 @@ namespace NapierBankMessaging
     /// </summary>
     public partial class MainWindow : Window
     {
+        Control con = new Control();
+
         public MainWindow()
         {
             InitializeComponent();
+            HideMessageGrids();
 
-            
+            //string[] dictionary = System.IO.File.ReadAllLines(@"DataLayer/textwords.csv");
 
+        }
+
+        private void HideMessageGrids()
+        {
+            grd_SMSDisplay.Visibility = Visibility.Hidden;
+            grd_TweetDisplay.Visibility = Visibility.Hidden;
+            grd_SIREmailDisplay.Visibility = Visibility.Hidden;
+            grd_EmailDisplay.Visibility = Visibility.Hidden;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string[] dictionary = System.IO.File.ReadAllLines(@"DataLayer/textwords.csv");
+            string header = tBox_NewMsgHeader.Text;
+            MessageBase test = new MessageBase(header, new string[] { "Hello", "SIRwqadw", "Sort Code:awd" });
+
+            switch (con.GetCurrentMessageType(test))
+            {
+                case 0:
+                    HideMessageGrids();
+                    // show error / default message
+                    break;
+                case 1:
+                    HideMessageGrids();
+                    grd_SMSDisplay.Visibility = Visibility.Visible;
+                    break;
+                case 2:
+                    HideMessageGrids();
+                    grd_EmailDisplay.Visibility = Visibility.Visible;
+                    break;
+                case 3:
+                    HideMessageGrids();
+                    grd_SIREmailDisplay.Visibility = Visibility.Visible;
+                    break;
+                case 4:
+                    HideMessageGrids();
+                    grd_TweetDisplay.Visibility = Visibility.Visible;
+                    break;
+                default:
+                    HideMessageGrids();
+                    // show error / default message
+                    break;
+            }
         }
     }
 }
