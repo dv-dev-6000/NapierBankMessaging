@@ -9,12 +9,98 @@ namespace NapierBankMessaging
     class Tweet : MessageBase
     {
         // Class Vars
-        private string sender;
-        private string filteredBody;
+        private string _sender;
+        private List<string> _filteredBody;
 
         public Tweet(string header, string[] body) : base(header, body)
         {
+            _sender = ExtractUserName(_rawBody);
+            _filteredBody = FilterBody(_rawBody);
+        }
 
+        private string ExtractUserName(string[] body)
+        {
+            string num = "TEST [@username] TEST";
+
+            return num;
+        }
+
+        /// <summary>
+        /// look for textspeak abvs and expand out
+        /// </summary>
+        /// <param name="rawbody"></param>
+        /// <returns>Returns a filtered string array</returns>
+        private List<string> FilterBody(string[] rawbody)
+        {
+            // var to store new filtered text
+            List<string> newBod = new List<string>();
+
+            // loop through each line of the message
+            for (int j = 0; j < rawbody.Length; j++)
+            {
+                // split current line in to a string array of individual words
+                string[] words;
+                words = rawbody[j].Split(' ');
+
+                // loop through each word
+                for (int i = 0; i < words.Length; i++)
+                {
+                    // expand text speak words if found
+                    foreach (txtSpeakItem item in db.txtDictionary)
+                    {
+                        // Find lone textspeak words
+                        if (item.abv == words[i])
+                        {
+                            words[i] = words[i] + " <" + item.full + ">";
+                            break;
+                        }
+
+                        // Find textspeak words with punctuation
+                        if (words[i].EndsWith(".") || words[i].EndsWith(",") || words[i].EndsWith(":") || words[i].EndsWith(";"))
+                        {
+                            string newWord = words[i].Remove(words[i].Length - 1, 1);
+
+                            if (item.abv == newWord)
+                            {
+                                switch (words[i][words[i].Length - 1])
+                                {
+                                    case '.':
+                                        words[i] = newWord + " <" + item.full + ">.";
+                                        break;
+                                    case ',':
+                                        words[i] = newWord + " <" + item.full + ">,";
+                                        break;
+                                    case ':':
+                                        words[i] = newWord + " <" + item.full + ">:";
+                                        break;
+                                    case ';':
+                                        words[i] = newWord + " <" + item.full + ">;";
+                                        break;
+                                }
+                                break;
+                            }
+                        }
+                    }
+
+                    // check for #
+
+
+                    // chack for @
+
+                }
+
+                // rebuild words into line
+                string line = null;
+                foreach (string word in words)
+                {
+                    line = line + " " + word;
+                }
+
+                // add new line to newBody
+                newBod.Add(line);
+            }
+
+            return newBod;
         }
     }
 }

@@ -6,10 +6,65 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
+    enum CurrMessageType
+    {
+        undefined,
+        sms,
+        email,
+        emailSIR,
+        tweet
+    }
+
     class Control
     {
         // Class Variables
-        private MessageBase _rawMessage, _currMessage;
+        private MessageBase _rawMessage;
+        private CurrMessageType _currMessType = CurrMessageType.undefined;
+
+        private SMS _sms;
+        private EmailStandard _email;
+        private EmailSIR _emailSIR;
+        private Tweet _tweet;
+
+        public SMS SMS
+        {
+            get
+            {
+                return _sms;
+            }
+        }
+
+        public EmailStandard Email
+        {
+            get
+            {
+                return _email;
+            }
+        }
+
+        public EmailSIR EmailSIR
+        {
+            get
+            {
+                return _emailSIR;
+            }
+        }
+
+        public Tweet Tweet
+        {
+            get
+            {
+                return _tweet;
+            }
+        }
+
+        public CurrMessageType CurrMessageType
+        {
+            get
+            {
+                return _currMessType;
+            }
+        }
 
         public Control()
         {
@@ -34,24 +89,42 @@ namespace NapierBankMessaging
             switch (header[0])
             {
                 case 'S':
+                    //set return value
                     tmp = 1;
+                    //create object
+                    _sms = new SMS(header, body);
                     break;
                 case 'E':
                     if (isSIR(body))
                     {
+                        //set return value
                         tmp = 3;
+                        //create object
+                        _emailSIR = new EmailSIR(header, body);
                     }
-                    else { tmp = 2; }
+                    else 
+                    {
+                        //set return value
+                        tmp = 2;
+                        //create object
+                        _email = new EmailStandard(header, body);
+                    }
                     break;
                 case 'T':
+                    //set return value
                     tmp = 4;
+                    //create object
+                    _tweet = new Tweet(header, body);
                     break;
                 default:
+                    //set return value
                     tmp = 0;
                     break;
 
 
             }
+
+            _currMessType = (CurrMessageType)tmp;
 
             return tmp;
         }

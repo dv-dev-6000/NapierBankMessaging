@@ -9,6 +9,7 @@ namespace NapierBankMessaging
     class MessageBase
     {
         // Class Variables
+        public Database db = new Database();
         protected string _rawHeader;
         protected string[] _rawBody;
 
@@ -22,6 +23,5 @@ namespace NapierBankMessaging
             _rawBody = body;
         }
 
-        
     }
 }

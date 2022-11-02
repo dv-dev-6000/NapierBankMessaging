@@ -27,8 +27,6 @@ namespace NapierBankMessaging
             InitializeComponent();
             HideMessageGrids();
 
-            //string[] dictionary = System.IO.File.ReadAllLines(@"DataLayer/textwords.csv");
-
         }
 
         private void HideMessageGrids()
@@ -39,12 +37,16 @@ namespace NapierBankMessaging
             grd_EmailDisplay.Visibility = Visibility.Hidden;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ClearMessageWriter()
         {
-            string header = tBox_NewMsgHeader.Text;
-            MessageBase test = new MessageBase(header, new string[] { "Hello", "SIRwqadw", "Sort Code:awd" });
+            // Clear Old
+            tBox_NewMsgHeader.Clear();
+            tBox_NewMsgBody.Clear();
+        }
 
-            switch (con.GetCurrentMessageType(test))
+        private void ProcessMessage(MessageBase raw)
+        {
+            switch (con.GetCurrentMessageType(raw))
             {
                 case 0:
                     HideMessageGrids();
@@ -53,6 +55,7 @@ namespace NapierBankMessaging
                 case 1:
                     HideMessageGrids();
                     grd_SMSDisplay.Visibility = Visibility.Visible;
+                    DisplayMessage(1);
                     break;
                 case 2:
                     HideMessageGrids();
@@ -71,6 +74,53 @@ namespace NapierBankMessaging
                     // show error / default message
                     break;
             }
+        }
+
+        public void DisplayMessage(int type)
+        {
+            ClearMessageWriter();
+
+            switch (type)
+            {
+                case 1:
+                    tBox_SMSBody.Clear();
+                    tBox_SMSNumber.Clear();
+                    // Display SMS
+                    tBox_SMSNumber.Text = con.SMS.PhoneNumber;
+                    for (int i = 0; i < con.SMS.FilteredBody.Count; i++)
+                    {
+                        tBox_SMSBody.AppendText(con.SMS.FilteredBody[i] + "\b");
+                    }
+
+                    break;
+                case 2:
+
+                    break;
+                case 3:
+                    
+                    break;
+                case 4:
+                    
+                    break;
+                default:
+                    // show error / default message
+                    break;
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            string header = tBox_NewMsgHeader.Text;
+            string[] body = new string[tBox_NewMsgBody.LineCount];
+
+            for (int i = 0; i < tBox_NewMsgBody.LineCount; i++)
+            {
+                body[i] = tBox_NewMsgBody.GetLineText(i);
+            } 
+            
+            MessageBase test = new MessageBase(header, body);
+
+            ProcessMessage(test);
         }
     }
 }

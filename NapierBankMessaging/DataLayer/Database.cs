@@ -11,6 +11,18 @@ namespace NapierBankMessaging
 
     }
 
+    struct txtSpeakItem
+    {
+        public string abv;
+        public string full;
+
+        public txtSpeakItem(string abv, string full)
+        {
+            this.abv = abv;
+            this.full = full;
+        }
+    }
+
     class Database
     {
         //Lists
@@ -19,11 +31,27 @@ namespace NapierBankMessaging
         List<string> MentionList = new List<string>();
         List<string> TrendingList = new List<string>();
 
+        public List<txtSpeakItem> txtDictionary = new List<txtSpeakItem>();
+
         public Database()
         {
+            FillTxtDictionary();
 
         }
 
+        private void FillTxtDictionary()
+        {
+            string[] tmp = System.IO.File.ReadAllLines(@"DataLayer/textwords.csv");
+
+            foreach (string line in tmp)
+            {
+                string[] splitline = line.Split(',');
+
+                txtSpeakItem item = new txtSpeakItem(splitline[0], splitline[1]);
+
+                txtDictionary.Add(item);
+            }
+        }
 
         private string SelectFile()
         {
