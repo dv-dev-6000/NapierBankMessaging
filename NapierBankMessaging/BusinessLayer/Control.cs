@@ -6,25 +6,35 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
-    enum CurrMessageType
+    struct Incident
     {
-        undefined,
-        sms,
-        email,
-        emailSIR,
-        tweet
+
     }
 
     class Control
     {
         // Class Variables
-        private MessageBase _rawMessage;
-        private CurrMessageType _currMessType = CurrMessageType.undefined;
-
         private SMS _sms;
         private EmailStandard _email;
         private EmailSIR _emailSIR;
         private Tweet _tweet;
+
+        // Lists
+        private List<Incident> _SIRList = new List<Incident>();
+        private List<string> _URLList = new List<string>();
+        private List<string> _MentionList = new List<string>();
+        private List<string> _TrendingList = new List<string>();
+
+        public List<string> TrendingList
+        {
+            get { return _TrendingList; }
+        }
+
+        public List<string> MentionList
+        {
+            get { return _MentionList; }
+        }
+
 
         public SMS SMS
         {
@@ -58,14 +68,6 @@ namespace NapierBankMessaging
             }
         }
 
-        public CurrMessageType CurrMessageType
-        {
-            get
-            {
-                return _currMessType;
-            }
-        }
-
         public Control()
         {
             
@@ -92,7 +94,7 @@ namespace NapierBankMessaging
                     //set return value
                     tmp = 1;
                     //create object
-                    _sms = new SMS(header, body);
+                    _sms = new SMS(header, body, raw.Con);
                     break;
                 case 'E':
                     if (isSIR(body))
@@ -100,21 +102,21 @@ namespace NapierBankMessaging
                         //set return value
                         tmp = 3;
                         //create object
-                        _emailSIR = new EmailSIR(header, body);
+                        _emailSIR = new EmailSIR(header, body, raw.Con);
                     }
                     else 
                     {
                         //set return value
                         tmp = 2;
                         //create object
-                        _email = new EmailStandard(header, body);
+                        _email = new EmailStandard(header, body, raw.Con);
                     }
                     break;
                 case 'T':
                     //set return value
                     tmp = 4;
                     //create object
-                    _tweet = new Tweet(header, body);
+                    _tweet = new Tweet(header, body, raw.Con);
                     break;
                 default:
                     //set return value
@@ -123,8 +125,6 @@ namespace NapierBankMessaging
 
 
             }
-
-            _currMessType = (CurrMessageType)tmp;
 
             return tmp;
         }

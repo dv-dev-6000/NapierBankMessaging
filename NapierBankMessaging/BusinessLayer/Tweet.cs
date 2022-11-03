@@ -12,7 +12,10 @@ namespace NapierBankMessaging
         private string _sender;
         private List<string> _filteredBody;
 
-        public Tweet(string header, string[] body) : base(header, body)
+        public string Sender { get => _sender; }
+        public List<string> FilteredBody { get => _filteredBody; }
+
+        public Tweet(string header, string[] body, Control con) : base(header, body, con)
         {
             _sender = ExtractUserName(_rawBody);
             _filteredBody = FilterBody(_rawBody);
@@ -20,7 +23,7 @@ namespace NapierBankMessaging
 
         private string ExtractUserName(string[] body)
         {
-            string num = "TEST [@username] TEST";
+            string num = "test @username";
 
             return num;
         }
@@ -46,12 +49,12 @@ namespace NapierBankMessaging
                 for (int i = 0; i < words.Length; i++)
                 {
                     // expand text speak words if found
-                    foreach (txtSpeakItem item in db.txtDictionary)
+                    foreach (txtSpeakItem item in db.TxtDictionary)
                     {
                         // Find lone textspeak words
-                        if (item.abv == words[i])
+                        if (item.Abv == words[i])
                         {
-                            words[i] = words[i] + " <" + item.full + ">";
+                            words[i] = words[i] + " <" + item.Full + ">";
                             break;
                         }
 
@@ -60,21 +63,21 @@ namespace NapierBankMessaging
                         {
                             string newWord = words[i].Remove(words[i].Length - 1, 1);
 
-                            if (item.abv == newWord)
+                            if (item.Abv == newWord)
                             {
                                 switch (words[i][words[i].Length - 1])
                                 {
                                     case '.':
-                                        words[i] = newWord + " <" + item.full + ">.";
+                                        words[i] = newWord + " <" + item.Full + ">.";
                                         break;
                                     case ',':
-                                        words[i] = newWord + " <" + item.full + ">,";
+                                        words[i] = newWord + " <" + item.Full + ">,";
                                         break;
                                     case ':':
-                                        words[i] = newWord + " <" + item.full + ">:";
+                                        words[i] = newWord + " <" + item.Full + ">:";
                                         break;
                                     case ';':
-                                        words[i] = newWord + " <" + item.full + ">;";
+                                        words[i] = newWord + " <" + item.Full + ">;";
                                         break;
                                 }
                                 break;
@@ -82,11 +85,24 @@ namespace NapierBankMessaging
                         }
                     }
 
-                    // check for #
-
-
-                    // chack for @
-
+                    
+                    if (words[i].Length > 0)
+                    {
+                        // check for # or @
+                        if (words[i][0] == '@')
+                        {
+                            // add only one instance of a name to mention list
+                            if (!_con.MentionList.Contains(words[i]))
+                            {
+                                _con.MentionList.Add(words[i]);
+                            }
+                        }
+                        else if (words[i][0] == '#')
+                        {
+                            // add every instance to trending list
+                            _con.TrendingList.Add(words[i]);
+                        }
+                    }
                 }
 
                 // rebuild words into line

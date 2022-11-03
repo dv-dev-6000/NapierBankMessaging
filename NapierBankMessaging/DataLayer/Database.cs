@@ -6,32 +6,29 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
-    struct Incident
-    {
-
-    }
-
     struct txtSpeakItem
     {
-        public string abv;
-        public string full;
+        private string _abv;
+        private string _full;
+
+        public string Abv { get => _abv; set => _abv = value; }
+        public string Full { get => _full; set => _full = value; }
 
         public txtSpeakItem(string abv, string full)
         {
-            this.abv = abv;
-            this.full = full;
+            _abv = abv;
+            _full = full;
         }
     }
 
     class Database
     {
-        //Lists
-        List<Incident> SIRList = new List<Incident>();
-        List<string> URLList = new List<string>();
-        List<string> MentionList = new List<string>();
-        List<string> TrendingList = new List<string>();
+        private List<txtSpeakItem> _txtDictionary = new List<txtSpeakItem>();
 
-        public List<txtSpeakItem> txtDictionary = new List<txtSpeakItem>();
+        public List<txtSpeakItem> TxtDictionary
+        {
+            get { return _txtDictionary; }
+        }
 
         public Database()
         {
@@ -49,7 +46,7 @@ namespace NapierBankMessaging
 
                 txtSpeakItem item = new txtSpeakItem(splitline[0], splitline[1]);
 
-                txtDictionary.Add(item);
+                _txtDictionary.Add(item);
             }
         }
 

@@ -44,7 +44,7 @@
         <Button Content="Trending" HorizontalAlignment="Left" Margin="485,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of trending hashtags from Twitter messages"/>
         <Button Content="Quarentine" HorizontalAlignment="Left" Margin="485,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of quarentined URLs"/>
         <Button Content="SIR" HorizontalAlignment="Left" Margin="615,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of Serious Incident Reports"/>
-        <Button Content="Mentions" HorizontalAlignment="Left" Margin="615,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of tagged Twitter users"/>
+        <Button x:Name="btn_MentionList" Content="Mentions" HorizontalAlignment="Left" Margin="615,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of tagged Twitter users" Click="btn_MentionList_Click"/>
         <Button Content="Process Single File" HorizontalAlignment="Left" Margin="822,45,0,0" VerticalAlignment="Top" FontSize="16" Width="166" ToolTip="Select a single text file to process"/>
         <Button Content="Process Multiple Files" HorizontalAlignment="Left" Margin="822,93,0,0" VerticalAlignment="Top" FontSize="16" Width="166" ToolTip="Select a folder to batch process multiple text files"/>
         <Label Content="View Lists" HorizontalAlignment="Left" Margin="470,1,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF68B6B2" FontSize="20"/>
@@ -55,8 +55,8 @@
             <Label Content="Tweet" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="White"/>
             <Label Content="Sender Twitter ID:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
             <Label Content="Message Body:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="325"/>
+            <TextBox x:Name="tBox_tweetSender" HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_tweetBody" HorizontalAlignment="Left" Margin="15,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="325"/>
 
         </Grid>
 

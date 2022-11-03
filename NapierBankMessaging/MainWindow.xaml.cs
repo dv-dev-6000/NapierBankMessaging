@@ -60,14 +60,17 @@ namespace NapierBankMessaging
                 case 2:
                     HideMessageGrids();
                     grd_EmailDisplay.Visibility = Visibility.Visible;
+                    DisplayMessage(2);
                     break;
                 case 3:
                     HideMessageGrids();
                     grd_SIREmailDisplay.Visibility = Visibility.Visible;
+                    DisplayMessage(3);
                     break;
                 case 4:
                     HideMessageGrids();
                     grd_TweetDisplay.Visibility = Visibility.Visible;
+                    DisplayMessage(4);
                     break;
                 default:
                     HideMessageGrids();
@@ -100,7 +103,15 @@ namespace NapierBankMessaging
                     
                     break;
                 case 4:
-                    
+                    tBox_tweetSender.Clear();
+                    tBox_tweetBody.Clear();
+                    // Display SMS
+                    tBox_tweetSender.Text = con.Tweet.Sender;
+                    for (int i = 0; i < con.Tweet.FilteredBody.Count; i++)
+                    {
+                        tBox_tweetBody.AppendText(con.Tweet.FilteredBody[i] + "\b");
+                    }
+
                     break;
                 default:
                     // show error / default message
@@ -118,9 +129,14 @@ namespace NapierBankMessaging
                 body[i] = tBox_NewMsgBody.GetLineText(i);
             } 
             
-            MessageBase test = new MessageBase(header, body);
+            MessageBase test = new MessageBase(header, body, con);
 
             ProcessMessage(test);
+        }
+
+        private void btn_MentionList_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -16,13 +16,11 @@ namespace NapierBankMessaging
         public List<string> FilteredBody { get => _filteredBody;}
 
 
-        public SMS(string header, string[] body) : base(header, body)
+        public SMS(string header, string[] body, Control con) : base(header, body, con)
         {
             _phoneNumber = ExtractNumber(_rawBody);
 
             _filteredBody = FilterBody(_rawBody);
-
-            
         }
 
         private string ExtractNumber(string[] body)
@@ -53,12 +51,12 @@ namespace NapierBankMessaging
                 for (int i = 0; i < words.Length; i++) 
                 {
                     // expand text speak words if found
-                    foreach (txtSpeakItem item in db.txtDictionary)
+                    foreach (txtSpeakItem item in db.TxtDictionary)
                     {
                         // Find lone textspeak words
-                        if (item.abv == words[i])
+                        if (item.Abv == words[i])
                         {
-                            words[i] = words[i] + " <" + item.full + ">";
+                            words[i] = words[i] + " <" + item.Full + ">";
                             break;
                         }
 
@@ -67,21 +65,21 @@ namespace NapierBankMessaging
                         {
                             string newWord = words[i].Remove(words[i].Length - 1, 1);
 
-                            if (item.abv == newWord)
+                            if (item.Abv == newWord)
                             {
                                 switch (words[i][words[i].Length-1])
                                 {
                                     case '.':
-                                        words[i] = newWord + " <" + item.full + ">.";
+                                        words[i] = newWord + " <" + item.Full + ">.";
                                         break;
                                     case ',':
-                                        words[i] = newWord + " <" + item.full + ">,";
+                                        words[i] = newWord + " <" + item.Full + ">,";
                                         break;
                                     case ':':
-                                        words[i] = newWord + " <" + item.full + ">:";
+                                        words[i] = newWord + " <" + item.Full + ">:";
                                         break;
                                     case ';':
-                                        words[i] = newWord + " <" + item.full + ">;";
+                                        words[i] = newWord + " <" + item.Full + ">;";
                                         break;
                                 }
                                 
