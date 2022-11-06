@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace NapierBankMessaging
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for ListView.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class ListView : Window
     {
-        public Window1()
+        public ListView()
         {
             InitializeComponent();
         }

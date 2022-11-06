@@ -136,7 +136,51 @@ namespace NapierBankMessaging
 
         private void btn_MentionList_Click(object sender, RoutedEventArgs e)
         {
+            ListView listWindow = new ListView();
+            listWindow.lstBx_List.ItemsSource = con.MentionList;
+            listWindow.lbl_title.Content = "Mention List";
+            listWindow.Show();
+        }
 
+        private void btn_TrendingList_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> uniqueOccurences = new List<string>();
+            List<string> displayList = new List<string>();
+
+            // create list of unique trending items
+            foreach (string item in con.TrendingList)
+            {
+                if (!uniqueOccurences.Contains(item))
+                {
+                    uniqueOccurences.Add(item);
+                }
+            }
+
+            // cylce through unique list
+            for (int i = 0; i < uniqueOccurences.Count; i++)
+            {
+                // count occurences of unique hashtags
+                int occurenceCount = 0;
+
+                foreach (string item in con.TrendingList)
+                {
+                    if (uniqueOccurences[i] == item)
+                    {
+                        occurenceCount++;
+                    }
+                }
+
+                // concatinate data for display
+                displayList.Add(occurenceCount + " " + uniqueOccurences[i]);
+            }
+
+            displayList.Sort();
+            displayList.Reverse();
+
+            ListView listWindow = new ListView();
+            listWindow.lstBx_List.ItemsSource = displayList;
+            listWindow.lbl_title.Content = "Trending List";
+            listWindow.Show();
         }
     }
 }

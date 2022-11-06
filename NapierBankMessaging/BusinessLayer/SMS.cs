@@ -25,7 +25,7 @@ namespace NapierBankMessaging
 
         private string ExtractNumber(string[] body)
         {
-            string num = "TEST";
+            string num = body[0];
 
             return num;
         }
@@ -40,8 +40,8 @@ namespace NapierBankMessaging
             // var to store new filtered text
             List<string> newBod = new List<string>();
 
-            // loop through each line of the message
-            for (int j = 0; j < rawbody.Length; j++)
+            // loop through each line of the message {SKIP FIRST LINE}
+            for (int j = 1; j < rawbody.Length; j++)
             {
                 // split current line in to a string array of individual words
                 string[] words;
