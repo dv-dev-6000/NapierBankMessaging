@@ -32,7 +32,7 @@
         <Label Content="NAPIER BANK" HorizontalAlignment="Left" Margin="4,21,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="52" Width="344"/>
         <Label Content="MESSAGING" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="32" Width="201" Foreground="White"/>
         <Rectangle HorizontalAlignment="Left" Height="504" Margin="29,172,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="395"/>
-        <Rectangle HorizontalAlignment="Left" Height="504" Margin="460,172,0,0" Stroke="#FF6876B6" VerticalAlignment="Top" Width="586" Visibility="Hidden"/>
+        <Rectangle HorizontalAlignment="Left" Height="504" Margin="460,172,0,0" Stroke="#FF6876B6" VerticalAlignment="Top" Width="586" Visibility="Visible"/>
         <Rectangle HorizontalAlignment="Left" Height="116" Margin="460,21,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="280"/>
         <TextBox x:Name="tBox_NewMsgHeader" HorizontalAlignment="Left" Margin="46,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="White"/>
         <TextBox x:Name="tBox_NewMsgBody" HorizontalAlignment="Left" Margin="46,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="White" Height="324" Text="" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>

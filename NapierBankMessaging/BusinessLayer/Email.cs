@@ -26,16 +26,16 @@ namespace NapierBankMessaging
 
         protected virtual string ExtractSender(string[] body)
         {
-            string num = body[0];
-
-            return num;
+            string sender = body[0];
+            sender = sender.TrimEnd('\r', '\n', '\t');
+            return sender;
         }
 
         protected virtual string ExtractSubject(string[] body)
         {
-            string num = body[1];
-
-            return num;
+            string sub = body[1];
+            sub = sub.TrimEnd('\r', '\n', '\t');
+            return sub;
         }
 
         /// <summary>
@@ -76,7 +76,11 @@ namespace NapierBankMessaging
                 string line = null;
                 foreach (string word in words)
                 {
-                    line = line + " " + word;
+                    if (line == null)
+                    {
+                        line = word;
+                    }
+                    else { line = line + " " + word; }
                 }
 
                 // add new line to newBody
@@ -110,17 +114,19 @@ namespace NapierBankMessaging
             string num = body[2];
 
             num = num.Substring(11);
+            num = num.TrimEnd('\r', '\n', '\t');
 
             return num;
         }
 
         private string ExtractNature(string[] body)
         {
-            string num = body[3];
+            string nat = body[3];
 
-            num = num.Substring(19);
+            nat = nat.Substring(19);
+            nat = nat.TrimEnd('\r', '\n', '\t');
 
-            return num;
+            return nat;
         }
     }
 }

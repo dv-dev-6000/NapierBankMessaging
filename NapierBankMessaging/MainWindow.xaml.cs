@@ -92,9 +92,8 @@ namespace NapierBankMessaging
                     tBox_SMSNumber.Text = con.SMS.PhoneNumber;
                     for (int i = 0; i < con.SMS.FilteredBody.Count; i++)
                     {
-                        tBox_SMSBody.AppendText(con.SMS.FilteredBody[i] + "\b");
+                        tBox_SMSBody.AppendText(con.SMS.FilteredBody[i] + "\n");
                     }
-
                     break;
                 case 2:
                     tBox_emailSender.Clear();
@@ -105,7 +104,7 @@ namespace NapierBankMessaging
                     tBox_emailSubject.Text = con.Email.Subject;
                     for (int i = 0; i < con.Email.FilteredBody.Count; i++)
                     {
-                        tBox__emailBody.AppendText(con.Email.FilteredBody[i] + "\b");
+                        tBox__emailBody.AppendText(con.Email.FilteredBody[i] + "\n");
                     }
                     break;
                 case 3:
@@ -121,7 +120,7 @@ namespace NapierBankMessaging
                     tBox_eNatureSIR.Text = con.EmailSIR.Nature;
                     for (int i = 0; i < con.EmailSIR.FilteredBody.Count; i++)
                     {
-                        tBox_eBodySIR.AppendText(con.EmailSIR.FilteredBody[i] + "\b");
+                        tBox_eBodySIR.AppendText(con.EmailSIR.FilteredBody[i] + "\n");
                     }
                     break;
                 case 4:
@@ -131,9 +130,8 @@ namespace NapierBankMessaging
                     tBox_tweetSender.Text = con.Tweet.Sender;
                     for (int i = 0; i < con.Tweet.FilteredBody.Count; i++)
                     {
-                        tBox_tweetBody.AppendText(con.Tweet.FilteredBody[i] + "\b");
+                        tBox_tweetBody.AppendText(con.Tweet.FilteredBody[i] + "\n");
                     }
-
                     break;
                 default:
                     // show error / default message

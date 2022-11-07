@@ -23,9 +23,16 @@ namespace NapierBankMessaging
 
         private string ExtractUserName(string[] body)
         {
-            string num = body[0];
+            string name = body[0];
 
-            return num;
+            name = name.TrimEnd('\r', '\n', '\t');
+
+            if (!_con.MentionList.Contains(name))
+            {
+                _con.MentionList.Add(name);
+            }
+
+            return name;
         }
 
         /// <summary>
@@ -48,6 +55,8 @@ namespace NapierBankMessaging
                 // loop through each word
                 for (int i = 0; i < words.Length; i++)
                 {
+                    words[i] = words[i].TrimEnd('\r', '\n', '\t');
+
                     // expand text speak words if found
                     foreach (txtSpeakItem item in db.TxtDictionary)
                     {
@@ -109,7 +118,11 @@ namespace NapierBankMessaging
                 string line = null;
                 foreach (string word in words)
                 {
-                    line = line + " " + word;
+                    if (line == null)
+                    {
+                        line = word;
+                    }
+                    else { line = line + " " + word; }
                 }
 
                 // add new line to newBody
