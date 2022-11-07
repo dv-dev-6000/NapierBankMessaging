@@ -17,7 +17,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Label x:Name="lbl_title" Content="&lt;name&gt;" HorizontalAlignment="Left" Margin="10,17,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="48" Width="319"/>
+        <Label x:Name="lbl_title" Content="&lt;name&gt;" HorizontalAlignment="Left" Margin="10,24,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="42" Width="319"/>
         <ListBox x:Name="lstBx_List" Width="400" Height="400" Margin="25,107,25,25" Background="White" BorderBrush="{x:Null}" FontSize="16" Focusable="False"/>
 
     </Grid>

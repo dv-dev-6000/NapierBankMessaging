@@ -97,10 +97,32 @@ namespace NapierBankMessaging
 
                     break;
                 case 2:
-
+                    tBox_emailSender.Clear();
+                    tBox_emailSubject.Clear();
+                    tBox__emailBody.Clear();
+                    // Display Email
+                    tBox_emailSender.Text = con.Email.Sender;
+                    tBox_emailSubject.Text = con.Email.Subject;
+                    for (int i = 0; i < con.Email.FilteredBody.Count; i++)
+                    {
+                        tBox__emailBody.AppendText(con.Email.FilteredBody[i] + "\b");
+                    }
                     break;
                 case 3:
-                    
+                    tBox_eBodySIR.Clear();
+                    tBox_eSenderSIR.Clear();
+                    tBox_eSubjectSIR.Clear();
+                    tBox_eSortSIR.Clear();
+                    tBox_eNatureSIR.Clear();
+                    // Display Email
+                    tBox_eSenderSIR.Text = con.EmailSIR.Sender;
+                    tBox_eSubjectSIR.Text = con.EmailSIR.Subject;
+                    tBox_eSortSIR.Text = con.EmailSIR.Sort;
+                    tBox_eNatureSIR.Text = con.EmailSIR.Nature;
+                    for (int i = 0; i < con.EmailSIR.FilteredBody.Count; i++)
+                    {
+                        tBox_eBodySIR.AppendText(con.EmailSIR.FilteredBody[i] + "\b");
+                    }
                     break;
                 case 4:
                     tBox_tweetSender.Clear();
@@ -180,6 +202,22 @@ namespace NapierBankMessaging
             ListView listWindow = new ListView();
             listWindow.lstBx_List.ItemsSource = displayList;
             listWindow.lbl_title.Content = "Trending List";
+            listWindow.Show();
+        }
+
+        private void btn_quarList_Click(object sender, RoutedEventArgs e)
+        {
+            ListView listWindow = new ListView();
+            listWindow.lstBx_List.ItemsSource = con.URLList;
+            listWindow.lbl_title.Content = "Quarentine List";
+            listWindow.Show();
+        }
+
+        private void btn_SIRList_Click(object sender, RoutedEventArgs e)
+        {
+            ListView listWindow = new ListView();
+            listWindow.lstBx_List.ItemsSource = con.SIRList;
+            listWindow.lbl_title.Content = "Incident List";
             listWindow.Show();
         }
     }

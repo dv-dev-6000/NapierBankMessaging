@@ -6,11 +6,6 @@ using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
-    struct Incident
-    {
-
-    }
-
     class Control
     {
         // Class Variables
@@ -20,7 +15,7 @@ namespace NapierBankMessaging
         private Tweet _tweet;
 
         // Lists
-        private List<Incident> _SIRList = new List<Incident>();
+        private List<string> _SIRList = new List<string>();
         private List<string> _URLList = new List<string>();
         private List<string> _MentionList = new List<string>();
         private List<string> _TrendingList = new List<string>();
@@ -33,6 +28,16 @@ namespace NapierBankMessaging
         public List<string> MentionList
         {
             get { return _MentionList; }
+        }
+
+        public List<string> URLList
+        {
+            get { return _URLList; }
+        }
+
+        public List<string> SIRList
+        {
+            get { return _SIRList; }
         }
 
 
@@ -102,14 +107,14 @@ namespace NapierBankMessaging
                         //set return value
                         tmp = 3;
                         //create object
-                        _emailSIR = new EmailSIR(header, body, raw.Con);
+                        _emailSIR = new EmailSIR(header, body, raw.Con, 4);
                     }
                     else 
                     {
                         //set return value
                         tmp = 2;
                         //create object
-                        _email = new EmailStandard(header, body, raw.Con);
+                        _email = new EmailStandard(header, body, raw.Con, 2);
                     }
                     break;
                 case 'T':
@@ -146,7 +151,7 @@ namespace NapierBankMessaging
             string line1 = body[2];
             string first10 = line1.Substring(0, 10);
 
-            if (first3 == "SIR" && first10 == "Sort Code:")
+            if (first3 == "SIR" && (first10 == "Sort Code:" || first10 == "sort code:"))
             {
                 tmp = true;
             }

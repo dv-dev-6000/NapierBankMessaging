@@ -32,7 +32,7 @@
         <Label Content="NAPIER BANK" HorizontalAlignment="Left" Margin="4,21,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="52" Width="344"/>
         <Label Content="MESSAGING" HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" FontSize="32" Width="201" Foreground="White"/>
         <Rectangle HorizontalAlignment="Left" Height="504" Margin="29,172,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="395"/>
-        <Rectangle HorizontalAlignment="Left" Height="504" Margin="460,172,0,0" Stroke="#FF6876B6" VerticalAlignment="Top" Width="586"/>
+        <Rectangle HorizontalAlignment="Left" Height="504" Margin="460,172,0,0" Stroke="#FF6876B6" VerticalAlignment="Top" Width="586" Visibility="Hidden"/>
         <Rectangle HorizontalAlignment="Left" Height="116" Margin="460,21,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="280"/>
         <TextBox x:Name="tBox_NewMsgHeader" HorizontalAlignment="Left" Margin="46,231,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="White"/>
         <TextBox x:Name="tBox_NewMsgBody" HorizontalAlignment="Left" Margin="46,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontSize="16" Background="White" Height="324" Text="" AcceptsReturn="True" AcceptsTab="True" VerticalScrollBarVisibility="Auto"/>
@@ -42,8 +42,8 @@
         <Button x:Name="btn_NewMsgProcess" Content="Process" HorizontalAlignment="Left" Margin="176,639,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="Submit the current message for processing" Click="Button_Click"/>
         <Rectangle HorizontalAlignment="Left" Height="116" Margin="765,21,0,0" Stroke="#FF68B6B2" VerticalAlignment="Top" Width="280"/>
         <Button x:Name="btn_TrendingList" Content="Trending" HorizontalAlignment="Left" Margin="485,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of trending hashtags from Twitter messages" Click="btn_TrendingList_Click"/>
-        <Button Content="Quarentine" HorizontalAlignment="Left" Margin="485,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of quarentined URLs"/>
-        <Button Content="SIR" HorizontalAlignment="Left" Margin="615,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of Serious Incident Reports"/>
+        <Button x:Name="btn_quarList" Content="Quarentine" HorizontalAlignment="Left" Margin="485,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of quarentined URLs" Click="btn_quarList_Click"/>
+        <Button x:Name="btn_SIRList" Content="SIR" HorizontalAlignment="Left" Margin="615,45,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of Serious Incident Reports" Click="btn_SIRList_Click"/>
         <Button x:Name="btn_MentionList" Content="Mentions" HorizontalAlignment="Left" Margin="615,93,0,0" VerticalAlignment="Top" FontSize="16" Width="100" ToolTip="View the list of tagged Twitter users" Click="btn_MentionList_Click"/>
         <Button Content="Process Single File" HorizontalAlignment="Left" Margin="822,45,0,0" VerticalAlignment="Top" FontSize="16" Width="166" ToolTip="Select a single text file to process"/>
         <Button Content="Process Multiple Files" HorizontalAlignment="Left" Margin="822,93,0,0" VerticalAlignment="Top" FontSize="16" Width="166" ToolTip="Select a folder to batch process multiple text files"/>
@@ -51,7 +51,7 @@
         <Label Content="Load External Messages" HorizontalAlignment="Left" Margin="777,1,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF68B6B2" FontSize="20"/>
         <Label Content="Message Viewer" HorizontalAlignment="Left" Margin="874,153,0,0" VerticalAlignment="Top" Background="#FF2D2D30" Foreground="#FF6876B6" FontSize="20"/>
 
-        <Grid x:Name="grd_TweetDisplay" Margin="460,172,34,28" Visibility="Visible">
+        <Grid x:Name="grd_TweetDisplay" Margin="460,172,34,28" Visibility="Hidden">
             <Label Content="Tweet" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="White"/>
             <Label Content="Sender Twitter ID:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
             <Label Content="Message Body:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
@@ -64,25 +64,25 @@
             <Label Content="Email Message (Standard)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="White"/>
             <Label Content="Sender Email Address:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
             <Label Content="Message Body:" HorizontalAlignment="Left" Margin="10,122,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="325"/>
+            <TextBox x:Name="tBox_emailSender" HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox__emailBody" HorizontalAlignment="Left" Margin="15,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="325"/>
             <Label Content="Subject:" HorizontalAlignment="Left" Margin="300,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="305,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_emailSubject" HorizontalAlignment="Left" Margin="305,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
 
         </Grid>
 
-        <Grid x:Name="grd_SIREmailDisplay" Margin="460,172,34,28" Visibility="Hidden">
+        <Grid x:Name="grd_SIREmailDisplay" Margin="460,172,34,28" Visibility="Visible">
             <Label Content="Email Message (SIR)" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="20" FontWeight="Bold" Foreground="White"/>
             <Label Content="Sender Email Address:" HorizontalAlignment="Left" Margin="10,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
             <Label Content="Message Body:" HorizontalAlignment="Left" Margin="10,175,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="271"/>
+            <TextBox x:Name="tBox_eSenderSIR" HorizontalAlignment="Left" Margin="15,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_eBodySIR" HorizontalAlignment="Left" Margin="15,211,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="550" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="100" Height="271"/>
             <Label Content="Subject:" HorizontalAlignment="Left" Margin="300,52,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="305,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_eSubjectSIR" HorizontalAlignment="Left" Margin="305,83,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
             <Label Content="Branch Sort Code:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="15,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_eSortSIR" HorizontalAlignment="Left" Margin="15,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
             <Label Content="Nature of Incident:" HorizontalAlignment="Left" Margin="300,111,0,0" VerticalAlignment="Top" FontSize="16" FontWeight="Normal" Foreground="White"/>
-            <TextBox HorizontalAlignment="Left" Margin="305,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
+            <TextBox x:Name="tBox_eNatureSIR" HorizontalAlignment="Left" Margin="305,142,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="260" FontSize="16" Background="White" IsReadOnly="True" IsUndoEnabled="False" MaxLines="1"/>
 
         </Grid>
 
