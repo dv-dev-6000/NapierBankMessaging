@@ -1,16 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
+    [DataContract]
     class EmailStandard : MessageBase
     {
         // Class Vars
+        [DataMember]
+        protected string TYPE = "Standard Email";
+        [DataMember]
         protected string _sender;
+        [DataMember]
         protected string _subject;
+        [DataMember]
         protected List<string> _filteredBody;
 
         public string Sender { get => _sender; }
@@ -61,6 +69,8 @@ namespace NapierBankMessaging
                 // loop through each word
                 for (int i = 0; i < words.Length; i++)
                 {
+                    words[i] = words[i].TrimEnd('\r', '\n', '\t');
+
                     //check for URLs
                     if (words[i].StartsWith("http") || words[i].StartsWith("https") || words[i].StartsWith("www."))
                     {
@@ -92,10 +102,16 @@ namespace NapierBankMessaging
 
     }
 
+
+
+
+    [DataContract]
     class EmailSIR : EmailStandard
     {
         // Class Vars
+        [DataMember]
         private string _sortCode;
+        [DataMember]
         private string _IncidentNature;
 
         public string Sort { get => _sortCode; }
@@ -107,6 +123,8 @@ namespace NapierBankMessaging
             _IncidentNature = ExtractNature(_rawBody);
 
             _con.SIRList.Add(_sortCode + " | " + _IncidentNature);
+
+            TYPE = "SIR Email";
         }
 
         private string ExtractSort(string[] body)

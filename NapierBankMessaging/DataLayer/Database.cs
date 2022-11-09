@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
+using System.IO;
 
 namespace NapierBankMessaging
 {
@@ -48,6 +51,24 @@ namespace NapierBankMessaging
 
                 _txtDictionary.Add(item);
             }
+        }
+
+        public bool WriteToJSON(object mType)
+        {
+            //write to JSON
+            DataContractJsonSerializer js = new DataContractJsonSerializer(mType.GetType());
+            MemoryStream ms = new MemoryStream();
+            StreamReader sr = new StreamReader(ms);
+            js.WriteObject(ms, mType);
+            ms.Position = 0;
+            using (StreamWriter sw = new StreamWriter("TEST.json", true))
+            {
+                sw.WriteLine(sr.ReadToEnd());
+                ms.Close();
+                sr.Close();
+            }
+
+            return true;
         }
 
         private string SelectFile()

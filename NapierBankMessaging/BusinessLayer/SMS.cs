@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 
 namespace NapierBankMessaging
 {
+    [DataContract]
     class SMS : MessageBase
     {
         // Class Vars
+        [DataMember]
+        private string TYPE = "SMS";
+        [DataMember]
         private string _phoneNumber;
+        [DataMember]
         private List<string> _filteredBody;
 
         public string PhoneNumber { get => _phoneNumber; }

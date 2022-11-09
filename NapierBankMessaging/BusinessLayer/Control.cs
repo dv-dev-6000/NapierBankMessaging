@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace NapierBankMessaging
 {
@@ -13,6 +14,7 @@ namespace NapierBankMessaging
         private EmailStandard _email;
         private EmailSIR _emailSIR;
         private Tweet _tweet;
+        private Database db = new Database();
 
         // Lists
         private List<string> _SIRList = new List<string>();
@@ -100,6 +102,9 @@ namespace NapierBankMessaging
                     tmp = 1;
                     //create object
                     _sms = new SMS(header, body, raw.Con);
+
+                    db.WriteToJSON(_sms);
+
                     break;
                 case 'E':
                     if (isSIR(body))
@@ -108,6 +113,8 @@ namespace NapierBankMessaging
                         tmp = 3;
                         //create object
                         _emailSIR = new EmailSIR(header, body, raw.Con, 4);
+
+                        db.WriteToJSON(_emailSIR);
                     }
                     else 
                     {
@@ -115,6 +122,8 @@ namespace NapierBankMessaging
                         tmp = 2;
                         //create object
                         _email = new EmailStandard(header, body, raw.Con, 2);
+
+                        db.WriteToJSON(_email);
                     }
                     break;
                 case 'T':
@@ -122,6 +131,9 @@ namespace NapierBankMessaging
                     tmp = 4;
                     //create object
                     _tweet = new Tweet(header, body, raw.Con);
+
+                    db.WriteToJSON(_tweet);
+
                     break;
                 default:
                     //set return value

@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NapierBankMessaging
 {
+    [DataContract]
     class Tweet : MessageBase
     {
         // Class Vars
+        [DataMember]
+        private string TYPE = "Tweet";
+        [DataMember]
         private string _sender;
+        [DataMember]
         private List<string> _filteredBody;
 
         public string Sender { get => _sender; }
