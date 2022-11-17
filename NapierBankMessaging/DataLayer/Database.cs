@@ -71,35 +71,26 @@ namespace NapierBankMessaging
             return true;
         }
 
-        private string SelectFile()
+        public string[] ReadFile(string filepath)
         {
-            string fp = null;
+            string[] tmp = File.ReadAllLines(filepath);
 
-            // get the filepath to load selected file
-
-            return fp;
+            return tmp;
         }
 
-        public void ReadFile(string filepath)
+        public Stack<string[]> PrepareQueue(string filepath)
         {
-            // detect type of message
-            // load in info from selected file
-        }
+            Stack<string[]> _messageListRAW = new Stack<string[]>();
 
+            string[] files = Directory.GetFiles(filepath, "*.txt");
 
-        private string SelectFolder()
-        {
-            string fp = null;
+            foreach(string file in files)
+            {
+                string[] tmp = File.ReadAllLines(file);
+                _messageListRAW.Push(tmp);
+            }
 
-            // get the filepath to load selected file
-
-            return fp;
-        }
-
-        public void PrepareQueue(string filepath)
-        {
-            // detect type of message
-            // load in info from selected file
+            return _messageListRAW;
         }
     }
 }

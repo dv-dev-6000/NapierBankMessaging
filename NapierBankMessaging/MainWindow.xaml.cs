@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 namespace NapierBankMessaging
 {
@@ -152,6 +153,8 @@ namespace NapierBankMessaging
             MessageBase test = new MessageBase(header, body, con);
 
             ProcessMessage(test);
+
+            LoadNext();
         }
 
         private void btn_MentionList_Click(object sender, RoutedEventArgs e)
@@ -217,6 +220,50 @@ namespace NapierBankMessaging
             listWindow.lstBx_List.ItemsSource = con.SIRList;
             listWindow.lbl_title.Content = "Incident List";
             listWindow.Show();
+        }
+
+        private void btn_loadSingle_Click(object sender, RoutedEventArgs e)
+        {
+            string[] txt = con.SelectFile();
+
+            for (int i = 0; i < txt.Length; i++)
+            {
+                if (i == 0)
+                {
+                    tBox_NewMsgHeader.Text = txt[i];
+                }
+                else
+                {
+                    tBox_NewMsgBody.Text = tBox_NewMsgBody.Text + txt[i] + "\n";
+                }
+            }
+        }
+
+        private void btn_loadMultiple_Click(object sender, RoutedEventArgs e)
+        {
+            con.SelectFolder();
+
+            LoadNext();
+        }
+
+        private void LoadNext()
+        {
+            if (con.MessageList != null && con.MessageList.Count > 0)
+            {
+                string[] txt = con.MessageList.Pop();
+
+                for (int i = 0; i < txt.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        tBox_NewMsgHeader.Text = txt[i];
+                    }
+                    else
+                    {
+                        tBox_NewMsgBody.Text = tBox_NewMsgBody.Text + txt[i] + "\n";
+                    }
+                }
+            }
         }
     }
 }

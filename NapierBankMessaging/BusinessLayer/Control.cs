@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Windows.Forms;
 
 namespace NapierBankMessaging
 {
@@ -21,6 +22,14 @@ namespace NapierBankMessaging
         private List<string> _URLList = new List<string>();
         private List<string> _MentionList = new List<string>();
         private List<string> _TrendingList = new List<string>();
+        private Stack<string[]> _messageListRAW;
+
+        #region Accessor Methods
+
+        public Stack<string[]> MessageList
+        {
+            get { return _messageListRAW; }
+        }
 
         public List<string> TrendingList
         {
@@ -74,6 +83,8 @@ namespace NapierBankMessaging
                 return _tweet;
             }
         }
+
+        #endregion
 
         public Control()
         {
@@ -169,6 +180,53 @@ namespace NapierBankMessaging
             }
 
             return tmp;
+        }
+
+        public string[] SelectFile()
+        {
+            // open file explorer and get filepath
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                string filePath;
+
+                openFileDialog.InitialDirectory = "D:\\Uni\\3rd Year\\TESTING";
+                openFileDialog.Filter = "txt files (*.txt)|*.txt";
+                openFileDialog.Title = "Choose a file to load";
+                openFileDialog.FilterIndex = 2;
+                openFileDialog.RestoreDirectory = true;
+
+                if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    //Get the path of specified file
+                    filePath = openFileDialog.FileName;
+
+                    return db.ReadFile(filePath);
+
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
+
+        public bool SelectFolder()
+        {
+            //code to select target folder
+            string filepath;
+
+            FolderBrowserDialog chooseFile = new FolderBrowserDialog();
+            chooseFile.SelectedPath = "D:\\Uni\\3rd Year\\TESTING";
+            chooseFile.Description = "Select a folder to load files from";
+            DialogResult result = chooseFile.ShowDialog();
+            if (result.ToString() != string.Empty)
+            {
+                filepath = chooseFile.SelectedPath;
+
+                _messageListRAW = db.PrepareQueue(filepath);
+            }
+
+            return true;
         }
     }
 }
