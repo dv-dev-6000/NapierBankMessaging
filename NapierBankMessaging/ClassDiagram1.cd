@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NapierBankMessaging.Control">
+    <Position X="3.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAiAAAACCQhgAAAEMAQAAAAACAIERABAAAAAAAAgE=</HashCode>
+      <FileName>BusinessLayer\Control.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.EmailStandard">
+    <Position X="8.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAABAAAAEIBAAAAEAiAAAAAAAAAAAAAIAQA=</HashCode>
+      <FileName>BusinessLayer\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.EmailSIR">
+    <Position X="8.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQACAQAAAAAAAAIgAABAAAAAA=</HashCode>
+      <FileName>BusinessLayer\Email.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.MessageBase">
+    <Position X="8.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAwQAAAAAAAAABAAAEgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BusinessLayer\MessageBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.SMS">
+    <Position X="6.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAABAgAAAABAQAAEAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>BusinessLayer\SMS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.Tweet">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAABAAAAAABAAAAEAAAAAAAAAAABAAAIAQA=</HashCode>
+      <FileName>BusinessLayer\Tweet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.Database">
+    <Position X="13.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQADAAQAAAAAQAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NapierBankMessaging.ListView" BaseTypeListCollapsed="true">
+    <Position X="1" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ListView.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="NapierBankMessaging.MainWindow" BaseTypeListCollapsed="true">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAoEAAgAISEBAAAEAEAAAAAAACAACAA=</HashCode>
+      <FileName>MainWindow.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Struct Name="NapierBankMessaging.txtSpeakItem">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAAAIAAAABAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>DataLayer\Database.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
