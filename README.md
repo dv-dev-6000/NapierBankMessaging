@@ -12,5 +12,5 @@ Software Engineering Coursework
 - [x] Implement standard email recognition
 - [x] Implement SIR email recognition 
 - [x] Output to JSON
-- [ ] Import message from txt file
-- [ ] Import multiple from folder
+- [x] Import message from txt file
+- [x] Import multiple from folder
