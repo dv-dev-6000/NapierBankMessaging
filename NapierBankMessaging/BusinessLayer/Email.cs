@@ -13,8 +13,6 @@ namespace NapierBankMessaging
     {
         // Class Vars
         [DataMember]
-        protected string TYPE = "Standard Email";
-        [DataMember]
         protected string _sender;
         [DataMember]
         protected string _subject;
@@ -30,6 +28,7 @@ namespace NapierBankMessaging
             _sender = ExtractSender(_rawBody);
             _subject = ExtractSubject(_rawBody);
             _filteredBody = FilterBody(_rawBody, bodStart);
+            TYPE = "Standard Email";
         }
 
         protected virtual string ExtractSender(string[] body)

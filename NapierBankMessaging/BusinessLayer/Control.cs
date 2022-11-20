@@ -84,6 +84,14 @@ namespace NapierBankMessaging
             }
         }
 
+        public Database DB
+        {
+            get
+            {
+                return db;
+            }
+        }
+
         #endregion
 
         public Control()

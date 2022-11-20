@@ -13,8 +13,6 @@ namespace NapierBankMessaging
     {
         // Class Vars
         [DataMember]
-        private string TYPE = "SMS";
-        [DataMember]
         private string _phoneNumber;
         [DataMember]
         private List<string> _filteredBody;
@@ -28,6 +26,8 @@ namespace NapierBankMessaging
             _phoneNumber = ExtractNumber(_rawBody);
 
             _filteredBody = FilterBody(_rawBody);
+
+            TYPE = "SMS";
         }
 
         private string ExtractNumber(string[] body)
@@ -60,7 +60,7 @@ namespace NapierBankMessaging
                     words[i] = words[i].TrimEnd('\r', '\n', '\t');
 
                     // expand text speak words if found
-                    foreach (txtSpeakItem item in db.TxtDictionary)
+                    foreach (txtSpeakItem item in _con.DB.TxtDictionary)
                     {
                         // Find lone textspeak words
                         if (item.Abv == words[i])

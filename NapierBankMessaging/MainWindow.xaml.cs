@@ -226,17 +226,21 @@ namespace NapierBankMessaging
         {
             string[] txt = con.SelectFile();
 
-            for (int i = 0; i < txt.Length; i++)
+            if (txt != null)
             {
-                if (i == 0)
+                for (int i = 0; i < txt.Length; i++)
                 {
-                    tBox_NewMsgHeader.Text = txt[i];
-                }
-                else
-                {
-                    tBox_NewMsgBody.Text = tBox_NewMsgBody.Text + txt[i] + "\n";
+                    if (i == 0)
+                    {
+                        tBox_NewMsgHeader.Text = txt[i];
+                    }
+                    else
+                    {
+                        tBox_NewMsgBody.Text = tBox_NewMsgBody.Text + txt[i] + "\n";
+                    }
                 }
             }
+            
         }
 
         private void btn_loadMultiple_Click(object sender, RoutedEventArgs e)

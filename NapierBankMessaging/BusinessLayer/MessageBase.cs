@@ -11,7 +11,9 @@ namespace NapierBankMessaging
     class MessageBase
     {
         // Class Variables
-        public Database db = new Database();
+        [DataMember]
+        protected string TYPE;
+
         protected Control _con;
 
         protected string _rawHeader;
@@ -28,6 +30,8 @@ namespace NapierBankMessaging
             _rawBody = body;
 
             _con = con;
+
+            TYPE = "base";
         }
 
     }
