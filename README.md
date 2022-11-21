@@ -3,9 +3,12 @@ Software Engineering Coursework
 
 ## Notes
 
-- [ ] add checks for blank/null values in new message form
-- [ ] add char limit checks and pop up for SMS and Tweet
-- [ ] refine SIR check (crash when line doesnt have enough characters)
+- [ ] add char limits on message body
+- [ ] navigate to env special folder
+
+- [x] add checks for blank/null values in new message form
+- [x] add pop up for SMS and Tweet
+- [x] refine SIR check (crash when line doesnt have enough characters)
 
 ## TO DO
 
