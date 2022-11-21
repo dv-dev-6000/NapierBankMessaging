@@ -35,6 +35,13 @@ namespace NapierBankMessaging
         {
             string sender = body[0];
             sender = sender.TrimEnd('\r', '\n', '\t');
+
+            // check email address for @
+            if (!sender.Contains('@'))
+            {
+                throw new Exception();
+            }
+
             return sender;
         }
 
@@ -130,8 +137,20 @@ namespace NapierBankMessaging
         {
             string num = body[2];
 
-            num = num.Substring(11);
-            num = num.TrimEnd('\r', '\n', '\t');
+            // look at first line for line begining "sort code:"
+            string first10 = num.Substring(0, 10);
+            first10 = first10.ToLower();
+            if (first10 == "sort code:")
+            {
+                // trim preceeding text (Sort Code:)
+                num = num.Substring(10);
+                num = num.TrimEnd('\r', '\n', '\t');
+                num = num.TrimStart();
+            }
+            else
+            {
+                throw new Exception();
+            }
 
             return num;
         }
@@ -140,8 +159,20 @@ namespace NapierBankMessaging
         {
             string nat = body[3];
 
-            nat = nat.Substring(19);
-            nat = nat.TrimEnd('\r', '\n', '\t');
+            // look at first line for line begining "Nature of Incident:"
+            string first19 = nat.Substring(0, 19);
+            first19 = first19.ToLower();
+            if (first19 == "nature of incident:")
+            {
+                // trim preceeding text (nature of incident:)
+                nat = nat.Substring(19);
+                nat = nat.TrimEnd('\r', '\n', '\t');
+                nat = nat.TrimStart();
+            }
+            else
+            {
+                throw new Exception();
+            }
 
             return nat;
         }

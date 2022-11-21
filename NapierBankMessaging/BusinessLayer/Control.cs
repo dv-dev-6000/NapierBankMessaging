@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace NapierBankMessaging
 {
@@ -101,6 +102,14 @@ namespace NapierBankMessaging
             
         }
 
+        private void ShowFormatError(string text, string type)
+        {
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            System.Windows.MessageBox.Show("The content does not conform to the format expected for messages of type: " + type + "\n\n" +
+                                            text, "Message Format Error", button, icon);
+        }
+
         /// <summary>
         /// Returns and integer value representing message type 
         /// </summary>
@@ -117,41 +126,79 @@ namespace NapierBankMessaging
             switch (header[0])
             {
                 case 'S':
-                    //set return value
-                    tmp = 1;
-                    //create object
-                    _sms = new SMS(header, body, raw.Con);
-
-                    db.WriteToJSON(_sms);
+                    try
+                    {
+                        //create object
+                        _sms = new SMS(header, body, raw.Con);
+                        //write to json
+                        db.WriteToJSON(_sms);
+                        //set return value
+                        tmp = 1;
+                    }
+                    catch
+                    {
+                        ShowFormatError("Line 1 should contain a valid phone number\n" +
+                            "The following lines should contain the message body (max 140 characters)", "SMS");
+                    }
+                    
 
                     break;
                 case 'E':
                     if (isSIR(body))
                     {
-                        //set return value
-                        tmp = 3;
-                        //create object
-                        _emailSIR = new EmailSIR(header, body, raw.Con, 4);
-
-                        db.WriteToJSON(_emailSIR);
+                        try
+                        {
+                            //create object
+                            _emailSIR = new EmailSIR(header, body, raw.Con, 4);
+                            //write to json
+                            db.WriteToJSON(_emailSIR);
+                            //set return value
+                            tmp = 3;
+                        }
+                        catch
+                        {
+                            ShowFormatError("Line 1 should contain the sender Email Address\n" +
+                                "Line 2 should contain the message subject beginning SIR\n" +
+                                "Line 3 should contain the branch sort code (Sort Code: 00 00 00)\n" +
+                                "Line 4 should contain incident info (Nature of Incident: theft etc.)\n" +
+                                "The following lines should contain the message body (max 1028 characters)", "SIR Email");
+                        }
                     }
                     else 
                     {
-                        //set return value
-                        tmp = 2;
-                        //create object
-                        _email = new EmailStandard(header, body, raw.Con, 2);
-
-                        db.WriteToJSON(_email);
+                        try
+                        {
+                            //create object
+                            _email = new EmailStandard(header, body, raw.Con, 2);
+                            //write to json
+                            db.WriteToJSON(_email);
+                            //set return value
+                            tmp = 2;
+                        }
+                        catch
+                        {
+                            ShowFormatError("Line 1 should contain the sender Email Address\n" +
+                                "Line 2 should contain the message subject\n" +
+                                "The following lines should contain the message body (max 1028 characters)", "Email");
+                        }
                     }
                     break;
                 case 'T':
-                    //set return value
-                    tmp = 4;
-                    //create object
-                    _tweet = new Tweet(header, body, raw.Con);
-
-                    db.WriteToJSON(_tweet);
+                    try
+                    {
+                        //create object
+                        _tweet = new Tweet(header, body, raw.Con);
+                        //write to json
+                        db.WriteToJSON(_tweet);
+                        //set return value
+                        tmp = 4;
+                    }
+                    catch
+                    {
+                        ShowFormatError("Line 1 should contain the Sender with leading @ symbol (@sender)\n" +
+                            "The following lines should contain the message body (max 140 characters)", "Tweet");
+                    }
+                    
 
                     break;
                 default:
@@ -172,19 +219,22 @@ namespace NapierBankMessaging
         /// <returns>bool (true if SIR, false if standard)</returns>
         private bool isSIR(string[] body)
         {
-            bool tmp = false;
-
-            // look at email subject for line begining "SIR"
-            string subject = body[1];
-            string first3 = subject.Substring(0, 3);
-
-            // look at first line for line begining "sort code:"
-            string line1 = body[2];
-            string first10 = line1.Substring(0, 10);
-
-            if (first3 == "SIR" && (first10 == "Sort Code:" || first10 == "sort code:"))
+            bool tmp= false;
+            
+            try
             {
-                tmp = true;
+                // look at email subject for line begining "SIR"
+                string subject = body[1];
+                string first3 = subject.Substring(0, 3);
+
+                if (first3 == "SIR")
+                {
+                    tmp = true;
+                }
+            }
+            catch
+            {
+                tmp = false;
             }
 
             return tmp;
@@ -226,15 +276,20 @@ namespace NapierBankMessaging
             FolderBrowserDialog chooseFile = new FolderBrowserDialog();
             chooseFile.SelectedPath = "D:\\Uni\\3rd Year\\TESTING";
             chooseFile.Description = "Select a folder to load files from";
-            DialogResult result = chooseFile.ShowDialog();
-            if (result.ToString() != string.Empty)
+
+            //DialogResult result = chooseFile.ShowDialog();
+            if (chooseFile.ShowDialog() == DialogResult.OK)
             {
                 filepath = chooseFile.SelectedPath;
 
                 _messageListRAW = db.PrepareQueue(filepath);
-            }
 
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

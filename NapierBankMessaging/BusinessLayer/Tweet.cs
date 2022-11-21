@@ -33,9 +33,16 @@ namespace NapierBankMessaging
 
             name = name.TrimEnd('\r', '\n', '\t');
 
-            if (!_con.MentionList.Contains(name))
+            if (!name.StartsWith('@'))
             {
-                _con.MentionList.Add(name);
+                throw new Exception();
+            }
+            else
+            {
+                if (!_con.MentionList.Contains(name))
+                {
+                    _con.MentionList.Add(name);
+                }
             }
 
             return name;

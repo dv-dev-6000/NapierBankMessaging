@@ -140,19 +140,72 @@ namespace NapierBankMessaging
             }
         }
 
+        private void ShowWarning(string text)
+        {
+            string messageBoxText = text;
+            string caption = "Input Error!";
+            MessageBoxButton button = MessageBoxButton.OK;
+            MessageBoxImage icon = MessageBoxImage.Warning;
+
+            System.Windows.MessageBox.Show(messageBoxText, caption, button, icon);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string header = tBox_NewMsgHeader.Text;
-            string[] body = new string[tBox_NewMsgBody.LineCount];
-
-            for (int i = 0; i < tBox_NewMsgBody.LineCount; i++)
+            // check text boxes have content
+            if (tBox_NewMsgHeader.Text.Length > 0 && tBox_NewMsgBody.Text.Length > 0)
             {
-                body[i] = tBox_NewMsgBody.GetLineText(i);
-            } 
-            
-            MessageBase test = new MessageBase(header, body, con);
+                // pass content to variables
+                string header = tBox_NewMsgHeader.Text;
+                string[] body = new string[tBox_NewMsgBody.LineCount];
+                for (int i = 0; i < tBox_NewMsgBody.LineCount; i++)
+                {
+                    body[i] = tBox_NewMsgBody.GetLineText(i);
+                }
 
-            ProcessMessage(test);
+                // check header has correct number of chars
+                if (header.Length == 10)
+                {
+                    // check header has correct leading char
+                    if (header.StartsWith('S') || header.StartsWith('T') || header.StartsWith('E'))
+                    {
+                        bool proceed = false;
+                        try
+                        {
+                            string tmp = header.Substring(1);
+                            int.Parse(tmp);
+                            proceed = true;
+                        }
+                        catch
+                        {
+                            // show warning
+                            ShowWarning("Message Header should begin 'S', 'E' or 'T' followed by 9 NUMBERS");
+                        }
+
+                        if (proceed)
+                        {
+                            // create message object instance and process message
+                            MessageBase test = new MessageBase(header, body, con);
+                            ProcessMessage(test);
+                        }
+                    }
+                    else
+                    {
+                        // show warning
+                        ShowWarning("Message Header should begin with capital letter 'S', 'E' or 'T'");
+                    }
+                }
+                else
+                {
+                    // show warning
+                    ShowWarning("Message Header should have a total character length of 10. ('S', 'E' or 'T' followed by 9 digits)");
+                }
+            }
+            else
+            {
+                // show warning
+                ShowWarning("Both 'Message Header' & 'Message Body' text boxs should contain text.");
+            }
 
             LoadNext();
         }
